@@ -13,27 +13,27 @@ export function patchConsole(logger: PinoLogger) {
     };
 
     console.debug = (...args) => {
-        _console.debug(args);
+        _console.debug(fmt(args));
     };
 
     console.error = (...args) => {
-        _console.error(args);
+        _console.error(fmt(args));
     };
 
     console.info = (...args) => {
-        _console.info(args);
+        _console.info(fmt(args));
     };
 
     console.log = (...args) => {
-        _console.info(args); // what should this be? which is higher level?
+        _console.info(fmt(args)); // what should this be? which is higher level?
     };
 
     console.trace = (...args) => {
-        _console.trace(args);
+        _console.trace(fmt(args));
     };
 
     console.warn = (...args) => {
-        _console.warn(args);
+        _console.warn(fmt(args));
     };
 
     return {
@@ -46,6 +46,6 @@ export function patchConsole(logger: PinoLogger) {
     };
 }
 
-function segment(...args: any[]) {
-    return
+function fmt(...args: any[]) {
+    return args?.length === 1 ? args[0] : args;
 }
