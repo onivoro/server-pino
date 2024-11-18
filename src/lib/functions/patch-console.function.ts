@@ -12,28 +12,28 @@ export function patchConsole(logger: PinoLogger) {
         warn: console.warn,
     };
 
-    console.debug = (...args: any[]) => {
-        _console.debug(fmt(...args));
+    console.debug = (...args) => {
+        fmt(() => _console.debug(...args), ...args);
     };
 
-    console.error = (...args: any[]) => {
-        _console.error(fmt(...args));
+    console.error = (...args) => {
+        fmt(() => _console.error(...args), ...args);
     };
 
-    console.info = (...args: any[]) => {
-        _console.info(fmt(...args));
+    console.info = (...args) => {
+        fmt(() => _console.info(...args), ...args);
     };
 
-    console.log = (...args: any[]) => {
-        _console.info(fmt(...args)); // what should this be? which is higher level?
+    console.log = (...args) => {
+        fmt(() => _console.info(...args), ...args);
     };
 
-    console.trace = (...args: any[]) => {
-        _console.trace(fmt(...args));
+    console.trace = (...args) => {
+        fmt(() => _console.trace(...args), ...args);
     };
 
-    console.warn = (...args: any[]) => {
-        _console.warn(fmt(...args));
+    console.warn = (...args) => {
+        fmt(() => _console.warn(...args), ...args);
     };
 
     return {
@@ -46,6 +46,8 @@ export function patchConsole(logger: PinoLogger) {
     };
 }
 
-function fmt(...args: any[]): any[] {
-    return args?.length === 1 ? [{ "msg": args[0] }] as any[] : args;
+function fmt(executor: any, ...args: any[]) {
+    return args?.length === 1
+        ? executor({ msg: args[0] })
+        : executor(...args)
 }
