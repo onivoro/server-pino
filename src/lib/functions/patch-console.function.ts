@@ -47,7 +47,7 @@ export function patchConsole(logger: PinoLogger) {
 
 
 function fmt(executor: any, ...args: any[]) {
-    _console.debug({args})
+    process.stdout.write(JSON.stringify(args, null, 2));
     return args?.length === 1
         ? executor({ msg: args[0] })
         : executor(...args)
