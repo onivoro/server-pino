@@ -1,4 +1,4 @@
-import { Logger, PinoLogger } from 'nestjs-pino';
+import { PinoLogger } from 'nestjs-pino';
 
 export function patchConsole(logger: PinoLogger) {
     const _console = logger;
@@ -14,32 +14,26 @@ export function patchConsole(logger: PinoLogger) {
 
     console.debug = (...args) => {
         _console.debug({msg: args});
-        // fmt(() => _console.debug(...args), ...args);
     };
 
     console.error = (...args) => {
         _console.error({msg: args});
-        // fmt(() => _console.error(...args), ...args);
     };
 
     console.info = (...args) => {
         _console.info({msg: args});
-        // fmt(() => _console.info(...args), ...args);
     };
 
     console.log = (...args) => {
         _console.info({msg: args});
-        // fmt(() => _console.info(...args), ...args);
     };
 
     console.trace = (...args) => {
         _console.trace({msg: args});
-        // fmt(() => _console.trace(...args), ...args);
     };
 
     console.warn = (...args) => {
         _console.warn({msg: args});
-        // fmt(() => _console.warn(...args), ...args);
     };
 
     return {
@@ -50,13 +44,4 @@ export function patchConsole(logger: PinoLogger) {
             });
         }
     };
-
-
-function fmt(executor: any, ...args: any[]) {
-    // process.stdout.write(JSON.stringify(args, null, 2));
-    return args?.length === 2
-        ? executor({ msg: args[0] })
-        : executor(...args)
-}
-
 }
