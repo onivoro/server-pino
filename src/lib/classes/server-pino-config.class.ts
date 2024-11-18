@@ -18,7 +18,7 @@ export class ServerPinoConfig implements Params {
   constructor(overrides?: Partial<Params>) {
     const defaultValues = ServerPinoConfig.getDefaultParams();
 
-    Object.entries(overrides || {}).forEach(([key, value]) => {
+    Object.entries({ ...defaultValues, ...(overrides || {}) }).forEach(([key, value]) => {
       (this as any)[key] = value;
     });
   }

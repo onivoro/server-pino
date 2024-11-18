@@ -9,7 +9,7 @@ export class ServerPinoModule {
   static configure(config: ServerPinoConfig, patchConsoleInstance = false) {
 
     if(patchConsoleInstance) {
-      patchConsole(new PinoLogger(config))
+      patchConsole(new PinoLogger(config));
     }
 
     return moduleFactory({
