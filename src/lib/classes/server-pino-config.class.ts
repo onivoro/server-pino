@@ -26,7 +26,7 @@ export class ServerPinoConfig implements Params {
   static getDefaultParams(): Params {
     return {
       pinoHttp: {
-        autoLogging: false,
+        autoLogging: true,
         genReqId: () => randomUUID(),
         redact: ['req.headers.authorization', `req.headers["${apiIdHeader}"]`, `req.headers["${apiKeyHeader}"]`, `req.headers["cookie"]`],
         useLevel: 'info',
