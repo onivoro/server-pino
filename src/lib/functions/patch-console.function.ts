@@ -12,28 +12,28 @@ export function patchConsole(logger: PinoLogger) {
         warn: console.warn,
     };
 
-    console.debug = (...args) => {
-        _console.debug(...args);
+    console.debug = (...args: any[]) => {
+        _console.debug(fmt(...args));
     };
 
-    console.error = (...args) => {
-        _console.error(...args);
+    console.error = (...args: any[]) => {
+        _console.error(fmt(...args));
     };
 
-    console.info = (...args) => {
-        _console.info(...args);
+    console.info = (...args: any[]) => {
+        _console.info(fmt(...args));
     };
 
-    console.log = (...args) => {
-        _console.info(...args); // what should this be? which is higher level?
+    console.log = (...args: any[]) => {
+        _console.info(fmt(...args)); // what should this be? which is higher level?
     };
 
-    console.trace = (...args) => {
-        _console.trace(...args);
+    console.trace = (...args: any[]) => {
+        _console.trace(fmt(...args));
     };
 
-    console.warn = (...args) => {
-        _console.warn(...args);
+    console.warn = (...args: any[]) => {
+        _console.warn(fmt(...args));
     };
 
     return {
@@ -46,6 +46,6 @@ export function patchConsole(logger: PinoLogger) {
     };
 }
 
-function fmt(...args: any[]) {
-    return args?.length === 1 ? args[0] : args;
+function fmt(...args: any[]): any[] {
+    return args?.length === 1 ? [{ "msg": args[0] }] as any[] : args;
 }

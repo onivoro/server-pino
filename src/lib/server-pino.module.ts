@@ -17,7 +17,6 @@ export class ServerPinoModule {
       imports: [LoggerModule.forRoot(config)],
       providers: [
         { provide: ServerPinoConfig, useValue: config },
-        // { provide: Logger, useFactory: (logger: PinoLogger) => logger, inject: [PinoLogger] }
       ]
     });
   }
